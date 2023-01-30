@@ -1,7 +1,5 @@
-import { ParticipantPopulated } from "../../../backend/src/util/types";
-
 export const formatUsernames = (
-  participants: Array<ParticipantPopulated>,
+  participants: Array<any>,
   myUserId: string
 ): string => {
   const usernames = participants
