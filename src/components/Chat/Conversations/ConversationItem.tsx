@@ -16,7 +16,6 @@ import { MdDeleteOutline } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineEdit } from "react-icons/ai";
 import { formatUsernames } from "../../../util/functions";
-import { ConversationPopulated } from "../../../../../backend/src/util/types";
 
 const formatRelativeLocale = {
   lastWeek: "eeee",
@@ -27,13 +26,13 @@ const formatRelativeLocale = {
 
 interface ConversationItemProps {
   userId: string;
-  conversation: ConversationPopulated;
+  conversation: any;
   onClick: () => void;
   onEditConversation?: () => void;
   hasSeenLatestMessage?: boolean;
   selectedConversationId?: string;
   onDeleteConversation?: (conversationId: string) => void;
-  onLeaveConversation?: (conversation: ConversationPopulated) => void;
+  onLeaveConversation?: (conversation: any) => void;
 }
 
 const ConversationItem: React.FC<ConversationItemProps> = ({

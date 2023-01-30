@@ -5,10 +5,7 @@ import { signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import {
-  ConversationPopulated,
-  ParticipantPopulated,
-} from "../../../../../backend/src/util/types";
+
 import { IModalContext, ModalContext } from "../../../context/ModalContext";
 import ConversationOperations from "../../../graphql/operations/conversations";
 import { ConversationsData } from "../../../util/types";
@@ -17,7 +14,7 @@ import ConversationModal from "./Modal/Modal";
 
 interface ConversationListProps {
   session: Session;
-  conversations: Array<ConversationPopulated>;
+  conversations: Array<any>;
   onViewConversation: (
     conversationId: string,
     hasSeenLatestMessage: boolean
@@ -35,8 +32,9 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
   const { modalOpen, openModal, closeModal } =
     useContext<IModalContext>(ModalContext);
-  const [editingConversation, setEditingConversation] =
-    useState<ConversationPopulated | null>(null);
+  const [editingConversation, setEditingConversation] = useState<any | null>(
+    null
+  );
 
   const router = useRouter();
   const { conversationId } = router.query;
@@ -55,7 +53,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
     { conversationId: string }
   >(ConversationOperations.Mutations.deleteConversation);
 
-  const onLeaveConversation = async (conversation: ConversationPopulated) => {
+  const onLeaveConversation = async (conversation: any) => {
     const participantIds = conversation.participants
       .filter((p) => p.user.id !== userId)
       .map((p) => p.user.id);
@@ -103,13 +101,13 @@ const ConversationList: React.FC<ConversationListProps> = ({
     }
   };
 
-  const getUserParticipantObject = (conversation: ConversationPopulated) => {
+  const getUserParticipantObject = (conversation: any) => {
     return conversation.participants.find(
       (p) => p.user.id === session.user.id
-    ) as ParticipantPopulated;
+    ) as any;
   };
 
-  const onEditConversation = (conversation: ConversationPopulated) => {
+  const onEditConversation = (conversation: any) => {
     setEditingConversation(conversation);
     openModal();
   };
