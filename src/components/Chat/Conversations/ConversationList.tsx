@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 
 import { IModalContext, ModalContext } from "../../../context/ModalContext";
 import ConversationOperations from "../../../graphql/operations/conversations";
-import { ConversationsData } from "../../../util/types";
+
 import ConversationItem from "./ConversationItem";
 import ConversationModal from "./Modal/Modal";
 
@@ -55,8 +55,8 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
   const onLeaveConversation = async (conversation: any) => {
     const participantIds = conversation.participants
-      .filter((p) => p.user.id !== userId)
-      .map((p) => p.user.id);
+      .filter((p: any) => p.user.id !== userId)
+      .map((p: any) => p.user.id);
 
     try {
       const { data, errors } = await updateParticipants({
@@ -103,7 +103,7 @@ const ConversationList: React.FC<ConversationListProps> = ({
 
   const getUserParticipantObject = (conversation: any) => {
     return conversation.participants.find(
-      (p) => p.user.id === session.user.id
+      (p: any) => p.user.id === session.user.id
     ) as any;
   };
 
