@@ -15,10 +15,7 @@ import { Session } from "next-auth";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import {
-  ConversationPopulated,
-  ParticipantPopulated,
-} from "../../../../../../backend/src/util/types";
+
 import ConversationOperations from "../../../../graphql/operations/conversations";
 import UserOperations from "../../../../graphql/operations/users";
 import {
@@ -35,15 +32,13 @@ interface ConversationModal {
   isOpen: boolean;
   onClose: () => void;
   session: Session;
-  conversations: Array<ConversationPopulated>;
-  editingConversation: ConversationPopulated | null;
+  conversations: Array<any>;
+  editingConversation: any | null;
   onViewConversation: (
     conversationId: string,
     hasSeenLatestMessage: boolean
   ) => void;
-  getUserParticipantObject: (
-    conversation: ConversationPopulated
-  ) => ParticipantPopulated;
+  getUserParticipantObject: (conversation: any) => any;
 }
 
 const ConversationModal: React.FC<ConversationModal> = ({
@@ -58,8 +53,9 @@ const ConversationModal: React.FC<ConversationModal> = ({
   const [username, setUsername] = useState("");
   const [participants, setParticipants] = useState<Array<SearchedUser>>([]);
 
-  const [existingConversation, setExistingConversation] =
-    useState<ConversationPopulated | null>(null);
+  const [existingConversation, setExistingConversation] = useState<any | null>(
+    null
+  );
 
   const router = useRouter();
   const {
@@ -114,11 +110,11 @@ const ConversationModal: React.FC<ConversationModal> = ({
    * participants does not already exist
    */
   const findExistingConversation = (participantIds: Array<string>) => {
-    let existingConversation: ConversationPopulated | null = null;
+    let existingConversation: any | null = null;
 
     for (const conversation of conversations) {
       const addedParticipants = conversation.participants.filter(
-        (p) => p.user.id !== userId
+        (p: any) => p.user.id !== userId
       );
 
       if (addedParticipants.length !== participantIds.length) {
@@ -181,7 +177,7 @@ const ConversationModal: React.FC<ConversationModal> = ({
     }
   };
 
-  const onUpdateConversation = async (conversation: ConversationPopulated) => {
+  const onUpdateConversation = async (conversation: any) => {
     const participantIds = participants.map((p) => p.id);
 
     try {
@@ -241,7 +237,7 @@ const ConversationModal: React.FC<ConversationModal> = ({
   useEffect(() => {
     if (editingConversation) {
       setParticipants(
-        editingConversation.participants.map((p) => p.user as SearchedUser)
+        editingConversation.participants.map((p: any) => p.user as SearchedUser)
       );
       return;
     }
