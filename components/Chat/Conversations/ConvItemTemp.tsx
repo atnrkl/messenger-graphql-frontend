@@ -11,7 +11,7 @@ import {
 import { formatRelative } from "date-fns";
 import enUS from "date-fns/locale/en-US";
 import React, { useState } from "react";
-import { GoPrimitiveDot } from "react-icons/go";
+
 import { MdDeleteOutline } from "react-icons/md";
 import { BiLogOut } from "react-icons/bi";
 import { AiOutlineEdit } from "react-icons/ai";
