@@ -8,7 +8,7 @@ const wsLink =
   typeof window !== "undefined"
     ? new GraphQLWsLink(
         createClient({
-          url: "wss://messenger-graphql.onrender.com/subscriptions",
+          url: "ws://messenger-graphql-backend.vercel.app/graphql/subscriptions",
           connectionParams: async () => ({
             session: await getSession(),
           }),
@@ -17,7 +17,7 @@ const wsLink =
     : null;
 
 const httpLink = new HttpLink({
-  uri: `https://messenger-graphql.onrender.com/graphql`,
+  uri: `https://messenger-graphql-backend.vercel.app/graphql`,
   credentials: "include",
 });
 
