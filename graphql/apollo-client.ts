@@ -8,7 +8,7 @@ const wsLink =
   typeof window !== "undefined"
     ? new GraphQLWsLink(
         createClient({
-          url: "ws://messenger-graphql.onrender.com/subscriptions",
+          url: "wss://messenger-graphql.onrender.com/subscriptions",
           connectionParams: async () => ({
             session: await getSession(),
           }),
